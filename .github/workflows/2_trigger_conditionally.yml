@@ -1,0 +1,17 @@
+name: Conditional Manual Trigger
+
+on:
+  workflow_run:
+    workflows: ["Testing"]
+    types:
+      - completed
+    branches:
+      - dev
+
+jobs:
+  conditional-job:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Execute workflow step
+        run: echo "This workflow runs only when the previous workflow succeeded."
