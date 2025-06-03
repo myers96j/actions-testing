@@ -8,3 +8,10 @@ jobs:
         run: |
           echo "hello"
           echo "world"
+
+  get_tag_value:
+    needs: echo_something
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Tag Value
+        run: echo "The value of NAME is ${{ vars.PROJECT_NAME }}"
