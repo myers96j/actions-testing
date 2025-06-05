@@ -15,11 +15,13 @@ jobs:
         run: echo "${{ steps.get_branch.outputs.branch_name }}"
       - name: Check previous workflow status
         uses: actions/github-script@v7
+        env:
+          branch_name: ${{ steps.get_branch.outputs.branch_name }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const { owner, repo } = context.repo;
-            const branchName = "${{ steps.get_branch.outputs.branch_name }}";
+            const branchName = process.env.BRANCH_NAME;
             const workflows = await github.rest.actions.listWorkflowRuns({
               owner,
               repo,
