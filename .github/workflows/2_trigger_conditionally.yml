@@ -19,11 +19,12 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const { owner, repo } = context.repo;
+            const branchName = "${{ steps.get_branch.outputs.branch_name }}";
             const workflows = await github.rest.actions.listWorkflowRuns({
               owner,
               repo,
               workflow_id: "1_workflow.yml",
-              branch: ${{ steps.get_branch.outputs.branch_name }}
+              branch: branchName
             });
             if (!workflows.data.workflow_runs.length || workflows.data.workflow_runs[0].conclusion !== "success") {
               core.setFailed("Previous workflow did not succeed. Manual trigger denied.");
