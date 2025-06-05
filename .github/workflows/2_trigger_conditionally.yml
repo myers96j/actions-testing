@@ -28,7 +28,8 @@ jobs:
               workflow_id: "1_workflow.yml",
               branch: branchName
             });
-            const filteredWorkflows = workflows.data.workflow_runs.filter(run => run.head_branch === branchName);      
+            console.log(workflows.data.workflow_runs);
+            const filteredWorkflows = workflows.data.workflow_runs.filter(run -> run.head_branch == branchName);      
             console.log(filteredWorkflows);
             if (!filteredWorkflows.length || filteredWorkflows[0].conclusion !== "success") {
               core.setFailed("Previous workflow did not succeed. Manual trigger denied.");
