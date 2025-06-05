@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Get branch name
         id: get_branch
-        run: echo "::set-output name=branch_name::${GITHUB#refs/heads/}"
+        run: echo "::set-output name=branch_name::${GITHUB_REF#refs/heads/}"
       - name: Write branch name
         run: echo "${{ steps.get_branch.outputs.branch_name }}"
       - name: Check previous workflow status
