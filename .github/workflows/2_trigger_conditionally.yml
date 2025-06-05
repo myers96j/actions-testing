@@ -5,8 +5,6 @@ on: workflow_dispatch
 jobs:
   check-previous:
     runs-on: ubuntu-latest
-    outputs:
-      branch_name: ${{ steps.get_branch.outputs.branch_name }}
     steps:
       - name: Get branch name
         id: get_branch
