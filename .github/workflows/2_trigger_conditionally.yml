@@ -28,7 +28,7 @@ jobs:
               workflow_id: "1_workflow.yml",
               branch: branchName
             });
-            echo workflows;
+            echo ${workflows};
             if (!workflows.data.workflow_runs.length || workflows.data.workflow_runs[0].conclusion !== "success") {
               core.setFailed("Previous workflow did not succeed. Manual trigger denied.");
             }
