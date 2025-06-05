@@ -1,15 +1,18 @@
 name: Conditional Manual Trigger
 
-on:
-  workflow_dispatch:
+on: workflow_dispatch
 
 jobs:
   check-previous:
     runs-on: ubuntu-latest
+    outputs:
+      branch_name: ${{ steps.get_branch.outputs.branch_name }}
     steps:
       - name: Get branch name
         id: get_branch
-        run: echo "::set-outputname=branch_name::${GITHUB#refs/heads/}"
+        run: echo "::set-output name=branch_name::${GITHUB#refs/heads/}"
+      - name: Write branch name
+        run: echo "${{ steps.get_branch.outputs.branch_name }}"
       - name: Check previous workflow status
         uses: actions/github-script@v7
         with:
